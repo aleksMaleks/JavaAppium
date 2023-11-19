@@ -103,6 +103,41 @@ public class FirstTest {
     }
 
     @Test
+    public void testVerifySearchResult() {
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Cannot find 'Search Wikipedia' input",
+                3
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "java",
+                "Cannot find search input",
+                3
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@class='android.view.ViewGroup']" +
+                        "//*[@text='Java (programming language)']"),
+                "Cannot find 'Java (programming language)' topic searching by 'Java'"
+        );
+
+        List<WebElement> search_results = driver.findElements(
+                By.xpath("//*[@resource-id='org.wikipedia:id/search_results_list']" +
+                        "//*[@class='android.view.ViewGroup']"));
+
+        for (WebElement search_result : search_results) {
+            WebElement result = search_result.findElement(
+                    By.xpath("//*[contains(@text,'Java')]"));
+            Assert.assertTrue(
+                    "Search result doesn't contain 'Java'",
+                    result.getText().contains("Java")
+            );
+        }
+    }
+
+    @Test
     public void testCompareArticleTitle() {
         waitForElementAndClick(
                 By.xpath("//*[contains(@text,'Search Wikipedia')]"),
