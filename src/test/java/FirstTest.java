@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
+import java.util.List;
 
 public class FirstTest {
 
@@ -67,7 +68,7 @@ public class FirstTest {
     }
 
     @Test
-    public void toCancelSearch() {
+    public void testCancelSearch() {
         waitForElementAndClick(
                 By.id("org.wikipedia:id/search_container"),
                 "Cannot find 'Search Wikipedia' input",
@@ -81,21 +82,28 @@ public class FirstTest {
                 3
         );
 
+        waitForElementPresent(
+                By.xpath("//*[@class='android.view.ViewGroup']" +
+                        "//*[@text='Java (programming language)']"),
+                "Cannot find 'Java (programming language)' topic searching by 'Java'"
+        );
+
         waitForElementAndClick(
-                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"), // By.id("org.wikipedia:id/search_close_btn"),
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
                 "Cannot find X to cancel search",
                 5
         );
 
         waitForElementNotPresent(
-                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
-                "Navigate up is still present on the page",
+                By.xpath("//*[@class='android.view.ViewGroup']" +
+                        "//*[@text='Java (programming language)']"),
+                "Search article is still present on the page",
                 3
         );
     }
 
     @Test
-    public void testCompareArticleTutle() {
+    public void testCompareArticleTitle() {
         waitForElementAndClick(
                 By.xpath("//*[contains(@text,'Search Wikipedia')]"),
                 "Cannot find 'Search Wikipedia' input",
