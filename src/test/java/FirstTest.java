@@ -16,6 +16,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.net.URL;
 import java.util.List;
 
+import static org.openqa.selenium.ScreenOrientation.LANDSCAPE;
+
 public class FirstTest {
 
     private AppiumDriver driver;
@@ -352,7 +354,9 @@ public class FirstTest {
     @Test
     public void testChangeScreenOrientationOnSearchResult() {
 
-//        driver.rotate(ScreenOrientation.PORTRAIT);
+        if (driver.getOrientation().equals(LANDSCAPE)) {
+            driver.rotate(ScreenOrientation.PORTRAIT);
+        }
 
         waitForElementAndClick(
                 By.xpath("//*[contains(@text,'Search Wikipedia')]"),
@@ -381,7 +385,7 @@ public class FirstTest {
                 15
         );
 
-        driver.rotate(ScreenOrientation.LANDSCAPE);
+        driver.rotate(LANDSCAPE);
 
         String title_after_rotation = waitForElementAndGetAttribute(
                 By.id("pcs-edit-section-title-description"),
@@ -727,4 +731,6 @@ public class FirstTest {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         return element.getAttribute(attribete);
     }
+
+
 }
