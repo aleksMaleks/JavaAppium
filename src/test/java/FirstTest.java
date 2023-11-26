@@ -374,17 +374,6 @@ public class FirstTest {
                 3
         );
 
-//        WebElement searchTextBox = waitForElementPresent(
-//                By.xpath("//*[@resource-id='pcs-edit-section-title-description']"),
-//                "Cannot find WebElement"
-//        );
-
-
-//        String title = searchTextBox.getAttribute("name");
-//        System.out.println(title);
-
-
-
         String title_before_rotation = waitForElementAndGetAttribute(
                 By.id("pcs-edit-section-title-description"),
                 "contentDescription",
@@ -452,6 +441,161 @@ public class FirstTest {
                         "//*[@text='Java (programming language)']"),
                 "Cannot find article after returning from background",
                 3
+        );
+    }
+
+    @Test
+    public void testSaveTwoArticleToMyList() {
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                3
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Java",
+                "Cannot find search input",
+                3
+        );
+
+
+
+        //Save first article
+        waitForElementAndClick(
+                By.xpath("//*[@class='android.view.ViewGroup']" +
+                        "//*[@text='Java (programming language)']"),
+                "Cannot find search result",
+                3
+        );
+
+        waitForElementPresent(
+                By.xpath("//android.view.View[@content-desc='Java (programming language)']"),
+                "Cannot find article title",
+                3
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/page_save"),
+                "Cannot find 'Save' button",
+                5
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/snackbar_action"),
+                "Cannot find 'Add to list' button",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.id("org.wikipedia:id/text_input"),
+                "TestList",
+                "Cannot find 'Name list' field",
+                5
+        );
+
+        waitForElementAndClick(
+                By.id("android:id/button1"),
+                "Cannot find 'OK' button",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Cannot find 'Navigate up' to cancel search",
+                5
+        );
+
+
+        //Save second article
+        waitForElementAndClick(
+                By.xpath("//*[@class='android.view.ViewGroup']" +
+                        "//*[@text='Island in Indonesia']"),
+                "Cannot find search result",
+                3
+        );
+
+        waitForElementPresent(
+                By.xpath("//android.view.View[@content-desc='Java']"),
+                "Cannot find article title",
+                3
+        );
+
+        String title_second_article = waitForElementAndGetAttribute(
+                By.id("pcs-edit-section-title-description"),
+                "contentDescription",
+                "Cannot find title of article ",
+                15
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/page_save"),
+                "Cannot find 'Save' button",
+                5
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/snackbar_action"),
+                "Cannot find 'Add to list' button",
+                5
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/item_title"),
+                "Cannot find 'TestList' SaveList",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Cannot find 'Navigate up' to cancel search",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Cannot find 'Navigate up' to cancel search",
+                5
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/nav_tab_reading_lists"),
+                "Cannot find 'Saved' button",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@class='android.view.ViewGroup']" +
+                        "//*[@text='TestList']"),
+                "Cannot find saved list 'TestList'",
+                5
+        );
+
+
+        //Delete one article
+        swipeElementToLeft(
+                By.xpath("//*[@text='Java (programming language)']"),
+                "Cannot find 'TestList' article in a save list"
+        );
+
+        waitForElementNotPresent(
+                By.xpath("//*[@text='Java (programming language)']"),
+                "Cannot delete saved article",
+                5
+        );
+
+
+        //Checking that there is a second article
+        waitForElementAndClick(
+                By.xpath("//*[@text='Island in Indonesia']"),
+                "Cannot find search result",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//android.view.View[@content-desc='Island in Indonesia']"),
+                "Cannot find article title",
+                5
         );
     }
 
