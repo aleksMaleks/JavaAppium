@@ -599,6 +599,37 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void testVerifyArticleTitle() {
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                3
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Java",
+                "Cannot find search input",
+                3
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@class='android.view.ViewGroup']" +
+                        "//*[@text='Java (programming language)']"),
+                "Cannot find search result",
+                3
+        );
+
+        int theArticleTitleIs = getAmountOfElements(
+                By.xpath("//android.view.View[@content-desc='Java (programming language)']")
+        );
+
+        System.out.println(theArticleTitleIs);
+
+        Assert.assertTrue(theArticleTitleIs == 1);
+    }
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.withMessage(error_message + "\n");
