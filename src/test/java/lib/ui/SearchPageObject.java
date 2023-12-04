@@ -18,10 +18,11 @@ public class SearchPageObject extends MainPageObject {
             CANCEL_SEARCH_BUTTON = "//android.widget.ImageButton[@content-desc='Navigate up']",
             SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/search_results_list']" +
                     "//*[@class='android.view.ViewGroup']//*[@text='{SUBSTRING}']",
+            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION = "//*[@resource-id='org.wikipedia:id/search_results_list']" +
+                    "//*[@ class ='android.view.ViewGroup']//*[@text='{TITLE}']/../*[@text='{DESCRIPTION}']",
             SEARCH_RESUL_ROW = "//*[@resource-id='org.wikipedia:id/search_results_list']" +
                     "//*[@resource-id='org.wikipedia:id/page_list_item_title']";
 
-    //*[@resource-id='org.wikipedia:id/search_results_list']//*[@class='android.view.ViewGroup']//*[@text='{SUBSTRING}']
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);
@@ -30,6 +31,11 @@ public class SearchPageObject extends MainPageObject {
     /* TEMPLATES METHODS */
     private static String getResultSearchElement(String substring) {
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
+    }
+
+    private static String getResultSearchElementByTitleAndDescription(String title, String description) {
+        String str = SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION.replace("{TITLE}", title);
+        return str.replace("{DESCRIPTION}", description);
     }
     /* TEMPLATES METHODS */
 
@@ -88,7 +94,6 @@ public class SearchPageObject extends MainPageObject {
         }
     }
 
-
     public void assertElementHasText(String expected_text) {
         WebElement web_element = waitForElementPresent(
                 By.xpath(SEARCH_FIELD_TEXT),
@@ -103,5 +108,12 @@ public class SearchPageObject extends MainPageObject {
                 expected_text,
                 actual_text
         );
+    }
+
+    public void waitForElementByTitleAndDescription(String title, String description) {
+        String search_result_xpath = getResultSearchElementByTitleAndDescription(title, description);
+        this.waitForElementPresent(By.xpath(search_result_xpath),
+                "Cannot find search result with Title '" + title +
+                        "' and Description '" + description + "'");
     }
 }

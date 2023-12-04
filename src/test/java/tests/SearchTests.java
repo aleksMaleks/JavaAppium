@@ -29,7 +29,7 @@ public class SearchTests extends CoreTestCase {
     public void testVerifySearchResult() {
         SearchPageObject SearchPageObject = new SearchPageObject(driver);
         SearchPageObject.initSearchIput();
-        String search_line = "Java"; //Linkin Park Diskography
+        String search_line = "Java";
         SearchPageObject.typeSearchLine(search_line);
         SearchPageObject.verifyAllSearchResultsContainText(search_line);
     }
@@ -38,5 +38,20 @@ public class SearchTests extends CoreTestCase {
     public void testVerifyTextSearchField() {
         SearchPageObject SearchPageObject = new SearchPageObject(driver);
         SearchPageObject.assertElementHasText("Search Wikipedia");
+    }
+
+    @Test
+    public void testVerifySearchByThreeFirstResults() {
+        String title1 = "Java", description1 = "Island in Indonesia",
+                title2 = "JavaScript", description2 = "High-level programming language",
+                title3 = "Java (programming language)", description3 = "Object-oriented programming language";
+
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchIput();
+        SearchPageObject.typeSearchLine("Java");
+
+        SearchPageObject.waitForElementByTitleAndDescription(title1, description1);
+        SearchPageObject.waitForElementByTitleAndDescription(title2, description2);
+        SearchPageObject.waitForElementByTitleAndDescription(title3, description3);
     }
 }

@@ -92,10 +92,6 @@ public class ArticlePageObject extends MainPageObject {
     }
 
     public void assertArticleTitlePresent() {
-//        this.waitForElementPresent(
-//                By.xpath("//*[@resource-id='pcs']/android.view.View[1]/android.view.View[1]"),
-//                "Cannot find element");
-
         WebElement element = driver.findElement(By.xpath(ARTICLE_TITLE));
         String actual_text = element.getAttribute("contentDescription");
         System.out.println(actual_text);
