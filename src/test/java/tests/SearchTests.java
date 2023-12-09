@@ -2,6 +2,7 @@ package tests;
 
 import lib.CoreTestCase;
 import lib.ui.SearchPageObject;
+import lib.ui.WelcomePageObject;
 import org.junit.Test;
 
 public class SearchTests extends CoreTestCase {
@@ -36,6 +37,8 @@ public class SearchTests extends CoreTestCase {
 
     @Test
     public void testVerifyTextSearchField() {
+        WelcomePageObject WelcomePageObject = new WelcomePageObject(driver);
+        WelcomePageObject.clickScipAndroid();
         SearchPageObject SearchPageObject = new SearchPageObject(driver);
         SearchPageObject.assertElementHasText("Search Wikipedia");
     }

@@ -5,6 +5,8 @@ import lib.ui.ArticlePageObject;
 import lib.ui.SearchPageObject;
 import org.junit.Test;
 
+import java.time.Duration;
+
 import static org.openqa.selenium.ScreenOrientation.LANDSCAPE;
 
 public class ChangeAppConditionTests extends CoreTestCase {
@@ -53,7 +55,7 @@ public class ChangeAppConditionTests extends CoreTestCase {
         SearchPageObject.initSearchIput();
         SearchPageObject.typeSearchLine("Java");
         SearchPageObject.waitForSearchResult("Java (programming language)");
-        this.backgroundApp(2);
+        this.backgroundApp(Duration.ofSeconds(2));
         SearchPageObject.waitForSearchResult("Java (programming language)");
     }
 }
