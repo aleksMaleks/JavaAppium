@@ -73,7 +73,7 @@ public class CoreTestCase extends TestCase {
                     "appium:app",
                     "/Users/aleksandrafonin/Desktop/JavaAppium/apks/Wikipedia.app");
         } else {
-            throw new Exception("Cannot get run platform from enc variable. Platform value " + PLATFORM_ENV);
+            throw new Exception("Cannot get run platform from enc variable. Platform value: " + PLATFORM_ENV);
         }
         return capabilities;
     }
@@ -84,7 +84,7 @@ public class CoreTestCase extends TestCase {
         } else if (PLATFORM_ENV.equals(PLATFORM_IOS)) {
             return driver = new IOSDriver(new URL(AppiumURL), capabilities);
         } else {
-            throw new Exception("Cannot get run platform from enc variable. Platform value " + PLATFORM_ENV);
+            throw new Exception("Cannot get run platform from enc variable. Platform value: " + PLATFORM_ENV);
         }
     }
 }
