@@ -1,11 +1,12 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
 
-public class SavedListPageObject extends MainPageObject {
+abstract public class SavedListPageObject extends MainPageObject {
 
-    private static final String
-            ARTICLE_NAME_BY_TPL = "xpath://*[@class='android.view.ViewGroup']//*[@text='{ARTICLE_NAME}']";
+    protected static String
+            ARTICLE_NAME_BY_TPL;
 
     private static String getArticleNameByXpath(String name_of_folder) {
         return ARTICLE_NAME_BY_TPL.replace("{ARTICLE_NAME}", name_of_folder);
@@ -47,6 +48,10 @@ public class SavedListPageObject extends MainPageObject {
                 article_xpath,
                 "Cannot find 'TestList' article in a save list"
         );
+
+        if (Platform.getInstance().isIOS()) {
+            this.clickElementToTheRightUpperCorner(article_title, "Cannot find saved article");
+        }
         this.waitForArticleToDisappearByTitle(article_title);
     }
 

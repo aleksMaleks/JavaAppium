@@ -1,22 +1,23 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class ArticlePageObject extends MainPageObject {
+abstract public class ArticlePageObject extends MainPageObject {
 
-    private static final String
-            SEARCH_ARTICLE_TITLE_BY_SUBSTRING_TPL = "xpath://android.view.View[@content-desc='{SUBSTRING}']",
-            ARTICLE_TITLE = "xpath://*[@resource-id='pcs']/android.view.View[1]/android.view.View[1]",
-            ARTICLE_TITLE_DESCRIPTION = "id:pcs-edit-section-title-description",
-            FOOTER_ELEMEN = "xpath://*[@content-desc='View article in browser']",
-            SAVE_BUTTON = "id:org.wikipedia:id/page_save",
-            SAVE_LIST_BUTTON = "id:org.wikipedia:id/item_title",
-            ADD_TO_LIST_BUTTON = "id:org.wikipedia:id/snackbar_action",
-            NAME_LIST_FIELD = "id:org.wikipedia:id/text_input",
-            OK_BUTTON = "id:android:id/button1",
-            NAVIGATION_UP_BUTTON = "xpath://android.widget.ImageButton[@content-desc='Navigate up']";
+    protected static String
+            SEARCH_ARTICLE_TITLE_BY_SUBSTRING_TPL,
+            ARTICLE_TITLE,
+            ARTICLE_TITLE_DESCRIPTION,
+            FOOTER_ELEMEN,
+            SAVE_BUTTON,
+            SAVE_LIST_BUTTON,
+            ADD_TO_LIST_BUTTON,
+            NAME_LIST_FIELD,
+            OK_BUTTON,
+            NAVIGATION_UP_BUTTON;
 
     public ArticlePageObject(AppiumDriver driver) {
         super(driver);
@@ -37,6 +38,9 @@ public class ArticlePageObject extends MainPageObject {
 
     public String getArticleTitle(String substring) {
         WebElement tittle_element = waitForTitleElementWithSubstring(substring);
+//        if (Platform.getInstance().isAndroid()) {
+//            return tittle_element.getAttribute("name");
+//        }
         return tittle_element.getAttribute("name");
     }
 
@@ -50,7 +54,18 @@ public class ArticlePageObject extends MainPageObject {
     }
 
     public void swipeToFooter() {
-        this.swipeUpToFindElement(FOOTER_ELEMEN, "Swipe error");
+        if (Platform.getInstance().isAndroid()) {
+            this.swipeUpToFindElement(
+                    FOOTER_ELEMEN,
+                    "Swipe error"
+            );
+        } else {
+            this.swipeUpTitleElementAppear(
+                    FOOTER_ELEMEN,
+                    "Swipe error",
+                    40
+            );
+        }
     }
 
 
@@ -96,5 +111,12 @@ public class ArticlePageObject extends MainPageObject {
         WebElement element = driver.findElement(by);
         String actual_text = element.getAttribute("contentDescription");
         System.out.println(actual_text);
+    }
+
+    public void addArticlesToMySavedIOS() {
+        this.waitForElementAndClick(SAVE_BUTTON,
+                "Cannot find options to add article to reading list",
+                5
+        );
     }
 }

@@ -9,19 +9,15 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 
-public class SearchPageObject extends MainPageObject {
+abstract public class SearchPageObject extends MainPageObject {
 
-    private static final String
-            SEARCH_FIELD = "xpath://*[contains(@text,'Search Wikipedia')]",
-            SEARCH_FIELD_TEXT = "xpath://*[@resource-id='org.wikipedia:id/search_container']" +
-                    "//*[@class='android.widget.TextView']",
-            CANCEL_SEARCH_BUTTON = "xpath://android.widget.ImageButton[@content-desc='Navigate up']",
-            SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/search_results_list']" +
-                    "//*[@class='android.view.ViewGroup']//*[@text='{SUBSTRING}']",
-            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION = "xpath://*[@resource-id='org.wikipedia:id/search_results_list']" +
-                    "//*[@ class ='android.view.ViewGroup']//*[@text='{TITLE}']/../*[@text='{DESCRIPTION}']",
-            SEARCH_RESUL_ROW = "xpath://*[@resource-id='org.wikipedia:id/search_results_list']" +
-                    "//*[@resource-id='org.wikipedia:id/page_list_item_title']";
+    protected static String
+            SEARCH_FIELD,
+            SEARCH_FIELD_TEXT,
+            CANCEL_SEARCH_BUTTON,
+            SEARCH_RESULT_BY_SUBSTRING_TPL,
+            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION,
+            SEARCH_RESUL_ROW;
 
 
     public SearchPageObject(AppiumDriver driver) {

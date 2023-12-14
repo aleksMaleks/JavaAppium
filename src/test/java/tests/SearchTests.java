@@ -3,13 +3,14 @@ package tests;
 import lib.CoreTestCase;
 import lib.ui.SearchPageObject;
 import lib.ui.WelcomePageObject;
+import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 
 public class SearchTests extends CoreTestCase {
 
     @Test
     public void testVerifySearchResults() {
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchIput();
         SearchPageObject.typeSearchLine("Java");
         SearchPageObject.waitForSearchResult("Java (programming language)");
@@ -17,7 +18,7 @@ public class SearchTests extends CoreTestCase {
 
     @Test
     public void testCancelSearch() {
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchIput();
         SearchPageObject.typeSearchLine("Java");
         SearchPageObject.waitForSearchResult("Java (programming language)");
@@ -28,7 +29,7 @@ public class SearchTests extends CoreTestCase {
 
     @Test
     public void testVerifySearchResult() {
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchIput();
         String search_line = "Java";
         SearchPageObject.typeSearchLine(search_line);
@@ -39,7 +40,7 @@ public class SearchTests extends CoreTestCase {
     public void testVerifyTextSearchField() {
         WelcomePageObject WelcomePageObject = new WelcomePageObject(driver);
         WelcomePageObject.clickScipAndroid();
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.assertElementHasText("Search Wikipedia");
     }
 
@@ -49,7 +50,7 @@ public class SearchTests extends CoreTestCase {
                 title2 = "JavaScript", description2 = "High-level programming language",
                 title3 = "Java (programming language)", description3 = "Object-oriented programming language";
 
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchIput();
         SearchPageObject.typeSearchLine("Java");
 
