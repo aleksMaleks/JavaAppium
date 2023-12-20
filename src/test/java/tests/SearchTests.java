@@ -38,8 +38,6 @@ public class SearchTests extends CoreTestCase {
 
     @Test
     public void testVerifyTextSearchField() {
-        WelcomePageObject WelcomePageObject = new WelcomePageObject(driver);
-        WelcomePageObject.clickScipAndroid();
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.assertElementHasText("Search Wikipedia");
     }

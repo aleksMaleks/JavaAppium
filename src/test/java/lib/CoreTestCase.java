@@ -19,7 +19,7 @@ public class CoreTestCase extends TestCase {
         super.setUp();
         driver = Platform.getInstance().getDriver();
         this.rotateScreenPortrait();
-        this.skipWelcomePageForIOSApp();
+        this.skipWelcomePage();
     }
 
     @Override
@@ -41,7 +41,7 @@ public class CoreTestCase extends TestCase {
         driver.runAppInBackground(seconds);
     }
 
-    private void skipWelcomePageForIOSApp() {
+    private void skipWelcomePage() {
         WelcomePageObject WelcomePageObject = new WelcomePageObject(driver);
         if (Platform.getInstance().isIOS()) {
             WelcomePageObject.clickScipIOS();

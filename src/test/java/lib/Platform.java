@@ -53,21 +53,21 @@ public class Platform {
         capabilities.setCapability("appium:appActivity", ".main.MainActivity");
         capabilities.setCapability(
                 "appium:app",
-                "/Users/aleksandrafonin/Desktop/JavaAppium/apks/org.wikipedia.apk");
+                "/Users/aleks/Desktop/JavaAppium/apks/org.wikipedia.apk");
         return capabilities;
     }
 
     private DesiredCapabilities getIOSDesiredCapabilities() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName", "iOS");
-        capabilities.setCapability("appium:deviceName", "iPhone 15");
-        capabilities.setCapability("appium:platformVersion", "17.2");
+        capabilities.setCapability("appium:deviceName", "iPhone 8");
+        capabilities.setCapability("appium:platformVersion", "12.4");
         capabilities.setCapability("appium:automationName", "XCUITest");
 //        capabilities.setCapability("appium:locale", "en");
 //        capabilities.setCapability("appium:language", "US");
         capabilities.setCapability(
                 "appium:app",
-                "/Users/aleksandrafonin/Desktop/JavaAppium/apks/Wikipedia.app");
+                "/Users/aleks/Desktop/JavaAppium/apks/Wikipedia.app");
         return capabilities;
     }
 

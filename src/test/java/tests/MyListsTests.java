@@ -11,10 +11,12 @@ import lib.ui.factories.NavigationUiFactory;
 import lib.ui.factories.SavedListPageObjectFactory;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 
 public class MyListsTests extends CoreTestCase {
 
     private static final String name_of_folder = "TestList";
+
 
     @Test
     public void testSaveFirstArticleToMyList() {
@@ -24,6 +26,9 @@ public class MyListsTests extends CoreTestCase {
         SearchPageObject.clickByArticleWithSubstring("Java (programming language)");
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
+
+
+
         ArticlePageObject.waitForTitleElementWithSubstring("Java (programming language)");
         String article_title = ArticlePageObject.getArticleTitle("Java (programming language)");
 
@@ -32,7 +37,6 @@ public class MyListsTests extends CoreTestCase {
         } else {
             ArticlePageObject.addArticlesToMySavedIOS();
         }
-
 
         ArticlePageObject.clickNavigationUpButton();
         ArticlePageObject.clickNavigationUpButton();
@@ -47,6 +51,7 @@ public class MyListsTests extends CoreTestCase {
         }
         SavedListPageObject.swipeByArticleToDelete(article_title);
     }
+
 
     @Test
     public void testSaveTwoArticleToMyList() {
