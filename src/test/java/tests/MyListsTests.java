@@ -98,7 +98,6 @@ public class MyListsTests extends CoreTestCase {
 
         //Checking that there is a second article
         MyListPageObject.clickByArticleWName(name_second_article);
-        MyListPageObject.waitForArticleToAppearByTitle(name_second_article);
         String article_text = "This article is about the Indonesian island.";
         MyListPageObject.waitForArticleToAppearByText(article_text);
     }

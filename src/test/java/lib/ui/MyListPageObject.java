@@ -7,11 +7,16 @@ abstract public class MyListPageObject extends MainPageObject {
 
     protected static String
             ARTICLE_NAME_BY_TPL,
+            SAVE_LIST_NAME_BY_TPL,
             ARTICLE_TEXT_BY_TPL,
             CLOSE_BUTTON_SYNC_POPUP_IOS;
 
     private static String getArticleNameByXpath(String name_of_folder) {
         return ARTICLE_NAME_BY_TPL.replace("{SUBSTRING}", name_of_folder);
+    }
+
+    private static String getSaveListNameByXpath(String name_of_folder) {
+        return SAVE_LIST_NAME_BY_TPL.replace("{SUBSTRING}", name_of_folder);
     }
 
     private static String getArticleTextByXpath(String article_text) {
@@ -23,10 +28,10 @@ abstract public class MyListPageObject extends MainPageObject {
     }
 
     public void clickSaveListByName(String name_of_folder) {
-        String folder_name_xpath = getArticleNameByXpath(name_of_folder);
+        String folder_name_xpath = getSaveListNameByXpath(name_of_folder);
         this.waitForElementAndClick(
                 folder_name_xpath,
-                "Cannot find saved list '" + name_of_folder + "'",
+                "Cannot find saved list: '" + name_of_folder + "'",
                 5
         );
     }

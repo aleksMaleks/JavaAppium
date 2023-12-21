@@ -6,7 +6,8 @@ import lib.ui.ArticlePageObject;
 public class AndroidArticlePageObject extends ArticlePageObject {
 
     static {
-        SEARCH_ARTICLE_TITLE_BY_SUBSTRING_TPL = "xpath://android.view.View[@content-desc='{SUBSTRING}']";
+//        SEARCH_ARTICLE_TITLE_BY_SUBSTRING_TPL = "xpath://android.view.View[@content-desc='{SUBSTRING}']";
+        SEARCH_ARTICLE_TITLE_BY_SUBSTRING_TPL = "xpath:(//android.view.View[@text='{SUBSTRING}'])[1]";
         ARTICLE_TITLE = "xpath://*[@resource-id='pcs']/android.view.View[1]/android.view.View[1]";
         ARTICLE_TITLE_DESCRIPTION = "id:pcs-edit-section-title-description";
         FOOTER_ELEMEN = "xpath://*[@content-desc='View article in browser']";
