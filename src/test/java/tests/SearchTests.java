@@ -48,9 +48,11 @@ public class SearchTests extends CoreTestCase {
                 title2 = "JavaScript", description2 = "High-level programming language",
                 title3 = "Java (programming language)", description3 = "Object-oriented programming language";
 
+
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchIput();
         SearchPageObject.typeSearchLine("Java");
+
 
         SearchPageObject.waitForElementByTitleAndDescription(title1, description1);
         SearchPageObject.waitForElementByTitleAndDescription(title2, description2);
