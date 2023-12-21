@@ -14,7 +14,7 @@ abstract public class NavigationUi extends MainPageObject {
         this.waitForElementAndClick(
                 SAVED_LIST_BUTTON,
                 "Cannot find 'Saved' button",
-                5
+                3
         );
     }
 

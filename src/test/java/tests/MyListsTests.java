@@ -4,14 +4,13 @@ import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.ArticlePageObject;
 import lib.ui.NavigationUi;
-import lib.ui.SavedListPageObject;
+import lib.ui.MyListPageObject;
 import lib.ui.SearchPageObject;
 import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.NavigationUiFactory;
-import lib.ui.factories.SavedListPageObjectFactory;
+import lib.ui.factories.MyListPageObjectFactory;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
 
 public class MyListsTests extends CoreTestCase {
 
@@ -26,9 +25,6 @@ public class MyListsTests extends CoreTestCase {
         SearchPageObject.clickByArticleWithSubstring("Java (programming language)");
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
-
-
-
         ArticlePageObject.waitForTitleElementWithSubstring("Java (programming language)");
         String article_title = ArticlePageObject.getArticleTitle("Java (programming language)");
 
@@ -38,18 +34,20 @@ public class MyListsTests extends CoreTestCase {
             ArticlePageObject.addArticlesToMySavedIOS();
         }
 
-        ArticlePageObject.clickNavigationUpButton();
-        ArticlePageObject.clickNavigationUpButton();
+        ArticlePageObject.clickNavigationBackButton();
+        SearchPageObject.clickCancelSearch();
 
         NavigationUi NavigationUi = NavigationUiFactory.get(driver);
         NavigationUi.clickSavedList();
 
-        SavedListPageObject SavedListPageObject = SavedListPageObjectFactory.get(driver);
+        MyListPageObject MyListPageObject = MyListPageObjectFactory.get(driver);
 
         if (Platform.getInstance().isAndroid()) {
-            SavedListPageObject.clickSaveListByName(name_of_folder);
+            MyListPageObject.clickSaveListByName(name_of_folder);
+        } else {
+            MyListPageObject.clickCloseButtonSyncPopup();
         }
-        SavedListPageObject.swipeByArticleToDelete(article_title);
+        MyListPageObject.swipeByArticleToDelete(article_title);
     }
 
 
@@ -63,26 +61,45 @@ public class MyListsTests extends CoreTestCase {
         String name_first_article = "Java (programming language)";
         SearchPageObject.clickByArticleWithSubstring(name_first_article);
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
-        ArticlePageObject.addFirstArticleToMyList(name_of_folder);
-        ArticlePageObject.clickNavigationUpButton();
+
+        if (Platform.getInstance().isAndroid()) {
+            ArticlePageObject.addFirstArticleToMyList(name_of_folder);
+        } else {
+            ArticlePageObject.addArticlesToMySavedIOS();
+        }
+
+        ArticlePageObject.clickNavigationBackButton();
 
         //Save second article
         String name_second_article = "Java";
         SearchPageObject.clickByArticleWithSubstring(name_second_article);
         ArticlePageObject.addSecondArticleToMyList();
-        ArticlePageObject.clickNavigationUpButton();
-        ArticlePageObject.clickNavigationUpButton();
+        ArticlePageObject.clickNavigationBackButton();
+
+        if (Platform.getInstance().isAndroid()) {
+            ArticlePageObject.clickNavigationBackButton();
+        } else {
+            SearchPageObject.clickCancelSearch();
+        }
+
         NavigationUi NavigationUi = NavigationUiFactory.get(driver);
         NavigationUi.clickSavedList();
-        SavedListPageObject SavedListPageObject = SavedListPageObjectFactory.get(driver);
-        SavedListPageObject.clickSaveListByName(name_of_folder);
+        MyListPageObject MyListPageObject = MyListPageObjectFactory.get(driver);
+
+        if (Platform.getInstance().isAndroid()) {
+            MyListPageObject.clickSaveListByName(name_of_folder);
+        } else {
+            MyListPageObject.clickCloseButtonSyncPopup();
+        }
 
         //Delete one article
-        SavedListPageObject.swipeByArticleToDelete(name_first_article);
-        SavedListPageObject.waitForArticleToDisappearByTitle(name_first_article);
+        MyListPageObject.swipeByArticleToDelete(name_first_article);
+        MyListPageObject.waitForArticleToDisappearByTitle(name_first_article);
 
         //Checking that there is a second article
-        SavedListPageObject.clickByArticleWName(name_second_article);
-        SavedListPageObject.waitForArticleToAppearByTitle(name_second_article);
+        MyListPageObject.clickByArticleWName(name_second_article);
+        MyListPageObject.waitForArticleToAppearByTitle(name_second_article);
+        String article_text = "This article is about the Indonesian island.";
+        MyListPageObject.waitForArticleToAppearByText(article_text);
     }
 }

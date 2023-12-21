@@ -38,9 +38,6 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     public String getArticleTitle(String substring) {
         WebElement tittle_element = waitForTitleElementWithSubstring(substring);
-//        if (Platform.getInstance().isAndroid()) {
-//            return tittle_element.getAttribute("name");
-//        }
         return tittle_element.getAttribute("name");
     }
 
@@ -87,17 +84,19 @@ abstract public class ArticlePageObject extends MainPageObject {
         this.waitForElementAndClick(
                 SAVE_BUTTON,"Cannot find 'Save' button",5);
 
-        this.waitForElementAndClick(
-                ADD_TO_LIST_BUTTON,"Cannot find 'Add to list' button",5);
+        if (Platform.getInstance().isAndroid()) {
+            this.waitForElementAndClick(
+                    ADD_TO_LIST_BUTTON,"Cannot find 'Add to list' button",5);
 
-        this.waitForElementAndClick(
-                SAVE_LIST_BUTTON,"Cannot find SaveList 'TestList' ",5);
+            this.waitForElementAndClick(
+                    SAVE_LIST_BUTTON,"Cannot find SaveList 'TestList' ",5);
+        }
     }
 
-    public void clickNavigationUpButton() {
+    public void clickNavigationBackButton() {
         this.waitForElementAndClick(
                 NAVIGATION_UP_BUTTON,
-                "Cannot find 'Navigate up' to cancel search", 5);
+                "Cannot find 'Navigate up' to cancel search", 3);
     }
 
     public void clickSaveButton() {

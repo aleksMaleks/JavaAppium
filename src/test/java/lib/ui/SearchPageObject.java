@@ -54,7 +54,7 @@ abstract public class SearchPageObject extends MainPageObject {
 
     public void clickCancelSearch() {
         this.waitForElementAndClick(CANCEL_SEARCH_BUTTON,
-                "Cannot find and click search cancel (Navigate up) button", 5);
+                "Cannot find and click search cancel (Navigate up) button", 3);
     }
 
     public void typeSearchLine(String search_line) {
@@ -97,7 +97,7 @@ abstract public class SearchPageObject extends MainPageObject {
                 5
         );
 
-        String actual_text = web_element.getAttribute("text");
+        String actual_text = web_element.getAttribute("name");
 
         Assert.assertEquals(
                 "Cannot find 'Search Wikipedia' input",

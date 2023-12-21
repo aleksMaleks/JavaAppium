@@ -11,7 +11,7 @@ public class Platform {
 
     private static final String PLATFORM_IOS = "ios";
     private static final String PLATFORM_ANDROID = "android";
-    private static final String APPIUM_URL = "http://127.0.0.1:4723/";
+    private static final String APPIUM_URL = "http://127.0.0.1:4723/wd/hub";
 
     private static Platform instance;
 
@@ -60,9 +60,9 @@ public class Platform {
     private DesiredCapabilities getIOSDesiredCapabilities() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName", "iOS");
-        capabilities.setCapability("appium:deviceName", "iPhone 8");
-        capabilities.setCapability("appium:platformVersion", "12.4");
-        capabilities.setCapability("appium:automationName", "XCUITest");
+        capabilities.setCapability("deviceName", "iPhone 8");
+        capabilities.setCapability("platformVersion", "14.5");
+//        capabilities.setCapability("appium:automationName", "XCUITest");
 //        capabilities.setCapability("appium:locale", "en");
 //        capabilities.setCapability("appium:language", "US");
         capabilities.setCapability(
