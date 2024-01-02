@@ -1,6 +1,5 @@
 package lib.ui;
 
-import com.sun.org.apache.bcel.internal.generic.PUSH;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class AuthtorizationPageObject extends MainPageObject {

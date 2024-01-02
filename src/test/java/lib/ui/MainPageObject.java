@@ -1,6 +1,5 @@
 package lib.ui;
 
-import com.sun.org.apache.bcel.internal.generic.PUSH;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
