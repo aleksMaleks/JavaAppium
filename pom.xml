@@ -28,24 +28,6 @@
             <artifactId>java-client</artifactId>
             <version>7.0.0</version>
         </dependency>
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>javax.websocket</groupId>-->
-<!--            <artifactId>javax.websocket-api</artifactId>-->
-<!--            <version>1.1</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.seleniumhq.selenium</groupId>-->
-<!--            <artifactId>selenium-server</artifactId>-->
-<!--            <version>3.14.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.seleniumhq.selenium</groupId>-->
-<!--            <artifactId>selenium-remote-driver</artifactId>-->
-<!--            <version>3.141.59</version>-->
-<!--        </dependency>-->
     </dependencies>
 
 </project>

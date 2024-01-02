@@ -1,6 +1,8 @@
 package tests;
 
+import io.appium.java_client.AppiumDriver;
 import lib.CoreTestCase;
+import lib.Platform;
 import lib.ui.ArticlePageObject;
 import lib.ui.SearchPageObject;
 import lib.ui.factories.ArticlePageObjectFactory;
@@ -10,6 +12,7 @@ import org.junit.Test;
 import java.time.Duration;
 
 import static org.openqa.selenium.ScreenOrientation.LANDSCAPE;
+import static org.openqa.selenium.ScreenOrientation.PORTRAIT;
 
 public class ChangeAppConditionTests extends CoreTestCase {
 
@@ -21,9 +24,22 @@ public class ChangeAppConditionTests extends CoreTestCase {
     @Test
     public void testChangeScreenOrientationOnSearchResult() {
 
+        if (Platform.getInstance().isMW()) {
+            return;
+        }
+
+        AppiumDriver driver = (AppiumDriver) this.driver;
         if (driver.getOrientation().equals(LANDSCAPE)) {
             this.rotateScreenPortrait();
         }
+
+//        if (driver instanceof AppiumDriver) {
+//            AppiumDriver driver = (AppiumDriver) this.driver;
+//            if (driver.getOrientation().equals(LANDSCAPE)) {
+//                this.rotateScreenPortrait();
+//            }
+//        }
+
 
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchIput();

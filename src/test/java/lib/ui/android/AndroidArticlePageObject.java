@@ -2,11 +2,11 @@ package lib.ui.android;
 
 import io.appium.java_client.AppiumDriver;
 import lib.ui.ArticlePageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class AndroidArticlePageObject extends ArticlePageObject {
 
     static {
-//        SEARCH_ARTICLE_TITLE_BY_SUBSTRING_TPL = "xpath://android.view.View[@content-desc='{SUBSTRING}']";
         SEARCH_ARTICLE_TITLE_BY_SUBSTRING_TPL = "xpath:(//android.view.View[@text='{SUBSTRING}'])[1]";
         ARTICLE_TITLE = "xpath://*[@resource-id='pcs']/android.view.View[1]/android.view.View[1]";
         ARTICLE_TITLE_DESCRIPTION = "id:pcs-edit-section-title-description";
@@ -19,7 +19,7 @@ public class AndroidArticlePageObject extends ArticlePageObject {
         NAVIGATION_UP_BUTTON = "xpath://android.widget.ImageButton[@content-desc='Navigate up']";
     }
 
-    public AndroidArticlePageObject(AppiumDriver driver) {
+    public AndroidArticlePageObject(RemoteWebDriver driver) {
         super(driver);
     }
 }

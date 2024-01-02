@@ -9,7 +9,7 @@ public class GetStartedTest extends CoreTestCase {
 
     @Test
     public void testVerifyTextSearchField() {
-        if (Platform.getInstance().isAndroid()) {
+        if ((Platform.getInstance().isAndroid()) || (Platform.getInstance().isMW())) {
             return;
         }
         WelcomePageObject WelcomePageObject = new WelcomePageObject(driver);

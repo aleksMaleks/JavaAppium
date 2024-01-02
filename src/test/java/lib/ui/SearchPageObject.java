@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ abstract public class SearchPageObject extends MainPageObject {
             SEARCH_RESUL_ROW;
 
 
-    public SearchPageObject(AppiumDriver driver) {
+    public SearchPageObject(RemoteWebDriver driver) {
         super(driver);
     }
 
@@ -79,9 +80,8 @@ abstract public class SearchPageObject extends MainPageObject {
                 SEARCH_RESUL_ROW,
                 "Cannot find search result row with text '" + contains_text + "'"
         );
-
-        List<WebElement> search_results = driver.findElements(
-                By.xpath(SEARCH_RESUL_ROW));
+        By by = this.getLocatorByString(SEARCH_RESUL_ROW);
+        List<WebElement> search_results = driver.findElements(by);
         for (WebElement search_result : search_results) {
             assertTrue(
                     "Search result doesn't contain text '" + contains_text + "'",

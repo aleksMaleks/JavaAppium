@@ -2,6 +2,7 @@ package lib.ui.ios;
 
 import io.appium.java_client.AppiumDriver;
 import lib.ui.NavigationUi;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class IOSNavigationUi extends NavigationUi {
 
@@ -9,7 +10,7 @@ public class IOSNavigationUi extends NavigationUi {
         SAVED_LIST_BUTTON = "id:Saved";
     }
 
-    public IOSNavigationUi(AppiumDriver driver) {
+    public IOSNavigationUi(RemoteWebDriver driver) {
         super(driver);
     }
 }

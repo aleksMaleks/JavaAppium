@@ -1,29 +1,34 @@
 package lib.ui;
 
-import io.appium.java_client.AppiumDriver;
 import lib.Platform;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 abstract public class MyListPageObject extends MainPageObject {
 
     protected static String
-            ARTICLE_NAME_BY_TPL,
+            ARTICLE_BY_TITLE_TPL,
             SAVE_LIST_NAME_BY_TPL,
             ARTICLE_TEXT_BY_TPL,
-            CLOSE_BUTTON_SYNC_POPUP_IOS;
+            CLOSE_BUTTON_SYNC_POPUP_IOS,
+            REMOVE_FROM_SAVED_BUTTON;
 
     private static String getArticleNameByXpath(String name_of_folder) {
-        return ARTICLE_NAME_BY_TPL.replace("{SUBSTRING}", name_of_folder);
+        return ARTICLE_BY_TITLE_TPL.replace("{SUBSTRING}", name_of_folder);
     }
 
     private static String getSaveListNameByXpath(String name_of_folder) {
         return SAVE_LIST_NAME_BY_TPL.replace("{SUBSTRING}", name_of_folder);
     }
 
+    private static String getRemoveButtonByTitle(String article_title) {
+        return REMOVE_FROM_SAVED_BUTTON.replace("{TITLE}", article_title);
+    }
+
     private static String getArticleTextByXpath(String article_text) {
         return ARTICLE_TEXT_BY_TPL.replace("{TEXT}", article_text);
     }
 
-    public MyListPageObject(AppiumDriver driver) {
+    public MyListPageObject(RemoteWebDriver driver) {
         super(driver);
     }
 
@@ -78,14 +83,29 @@ abstract public class MyListPageObject extends MainPageObject {
     public void swipeByArticleToDelete(String article_title) {
         this.waitForArticleToAppearByTitle(article_title);
         String article_xpath = getArticleNameByXpath(article_title);
-        this.swipeElementToLeft(
-                article_xpath,
-                "Cannot find saved article"
-        );
+
+        if (Platform.getInstance().isIOS() || Platform.getInstance().isAndroid()) {
+            this.swipeElementToLeft(
+                    article_xpath,
+                    "Cannot find saved article"
+            );
+        } else {
+            String remove_locator = getRemoveButtonByTitle(article_title);
+            this.waitForElementAndClick(
+                    remove_locator,
+                    "Cannot click button to remove article from saved",
+                    10
+            );
+        }
 
         if (Platform.getInstance().isIOS()) {
             this.clickElementToTheRightUpperCorner(article_xpath, "Cannot find saved article");
         }
+
+        if (Platform.getInstance().isMW()) {
+            driver.navigate().refresh();
+        }
+
         this.waitForArticleToDisappearByTitle(article_title);
     }
 }

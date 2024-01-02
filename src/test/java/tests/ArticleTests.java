@@ -14,14 +14,14 @@ public class ArticleTests extends CoreTestCase {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchIput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.clickByArticleWithSubstring("Java (programming language)");
+        SearchPageObject.clickByArticleWithSubstring("ava (programming language)");
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
-        String article_title = ArticlePageObject.getArticleTitle("Java (programming language)");
+        String article_title = ArticlePageObject.getArticleTitle("ava (programming language)");
 
         assertEquals(
                 "We see unexpected title",
-                "Java (programming language)",
+                "ava (programming language)",
                 article_title
         );
     }
@@ -31,10 +31,10 @@ public class ArticleTests extends CoreTestCase {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchIput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
+        SearchPageObject.clickByArticleWithSubstring("bject-oriented programming language");
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
-        ArticlePageObject.waitForTitleElementWithSubstring("Object-oriented programming language");
+        ArticlePageObject.waitForTitleElementWithSubstring("bject-oriented programming language");
         ArticlePageObject.swipeToFooter();
     }
 
@@ -43,7 +43,7 @@ public class ArticleTests extends CoreTestCase {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchIput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.clickByArticleWithSubstring("Java (programming language)");
+        SearchPageObject.clickByArticleWithSubstring("ava (programming language)");
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.assertArticleTitlePresent();

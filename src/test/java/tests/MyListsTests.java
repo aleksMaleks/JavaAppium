@@ -2,10 +2,7 @@ package tests;
 
 import lib.CoreTestCase;
 import lib.Platform;
-import lib.ui.ArticlePageObject;
-import lib.ui.NavigationUi;
-import lib.ui.MyListPageObject;
-import lib.ui.SearchPageObject;
+import lib.ui.*;
 import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.NavigationUiFactory;
 import lib.ui.factories.MyListPageObjectFactory;
@@ -15,6 +12,9 @@ import org.junit.Test;
 public class MyListsTests extends CoreTestCase {
 
     private static final String name_of_folder = "TestList";
+    private static final String
+            login = "Aleks",
+            password = "08021977";
 
 
     @Test
@@ -22,11 +22,11 @@ public class MyListsTests extends CoreTestCase {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchIput();
         SearchPageObject.typeSearchLine("Java");
-        SearchPageObject.clickByArticleWithSubstring("Java (programming language)");
+        SearchPageObject.clickByArticleWithSubstring("ava (programming language)");
 
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
-        ArticlePageObject.waitForTitleElementWithSubstring("Java (programming language)");
-        String article_title = ArticlePageObject.getArticleTitle("Java (programming language)");
+        ArticlePageObject.waitForTitleElementWithSubstring("ava (programming language)");
+        String article_title = ArticlePageObject.getArticleTitle("ava (programming language)");
 
         if (Platform.getInstance().isAndroid()) {
             ArticlePageObject.addFirstArticleToMyList(name_of_folder);
@@ -34,10 +34,28 @@ public class MyListsTests extends CoreTestCase {
             ArticlePageObject.addArticlesToMySavedIOS();
         }
 
+        if (Platform.getInstance().isMW()) {
+            AuthtorizationPageObject Auth = new AuthtorizationPageObject(driver);
+            Auth.clickAuthButton();
+            Auth.enterLoginData(login, password);
+            Auth.submitForm();
+
+            ArticlePageObject.waitForTitleElementWithSubstring("Java");
+
+            assertEquals(
+                    "We are not on the same page after login",
+                    article_title,
+                    ArticlePageObject.getArticleTitle("Java")
+            );
+
+            ArticlePageObject.addArticleToMySaved();
+        }
+
         ArticlePageObject.clickNavigationBackButton();
         SearchPageObject.clickCancelSearch();
 
         NavigationUi NavigationUi = NavigationUiFactory.get(driver);
+        NavigationUi.openNavigation();
         NavigationUi.clickSavedList();
 
         MyListPageObject MyListPageObject = MyListPageObjectFactory.get(driver);
@@ -58,7 +76,7 @@ public class MyListsTests extends CoreTestCase {
         SearchPageObject.typeSearchLine("Java");
 
         //Save first article
-        String name_first_article = "Java (programming language)";
+        String name_first_article = "ava (programming language)";
         SearchPageObject.clickByArticleWithSubstring(name_first_article);
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
 
@@ -98,7 +116,7 @@ public class MyListsTests extends CoreTestCase {
 
         //Checking that there is a second article
         MyListPageObject.clickByArticleWName(name_second_article);
-        String article_text = "This article is about the Indonesian island.";
+        String article_text = "his article is about the Indonesian island.";
         MyListPageObject.waitForArticleToAppearByText(article_text);
     }
 }
