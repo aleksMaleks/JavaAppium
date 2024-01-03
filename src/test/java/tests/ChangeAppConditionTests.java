@@ -34,14 +34,6 @@ public class ChangeAppConditionTests extends CoreTestCase {
             this.rotateScreenPortrait();
         }
 
-//        if (driver instanceof AppiumDriver) {
-//            AppiumDriver driver = (AppiumDriver) this.driver;
-//            if (driver.getOrientation().equals(LANDSCAPE)) {
-//                this.rotateScreenPortrait();
-//            }
-//        }
-
-
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         SearchPageObject.initSearchIput();
         SearchPageObject.typeSearchLine("Java");
