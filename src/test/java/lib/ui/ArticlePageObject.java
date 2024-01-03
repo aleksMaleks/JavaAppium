@@ -42,6 +42,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     public String getArticleTitle(String substring) {
         WebElement tittle_element = waitForTitleElementWithSubstring(substring);
+        screenshot(this.takeScreenshot("article_title"));
         if (Platform.getInstance().isMW()) {
             return tittle_element.getText();
         } else {

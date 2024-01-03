@@ -7,6 +7,7 @@ import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.NavigationUiFactory;
 import lib.ui.factories.MyListPageObjectFactory;
 import lib.ui.factories.SearchPageObjectFactory;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class MyListsTests extends CoreTestCase {
@@ -42,7 +43,7 @@ public class MyListsTests extends CoreTestCase {
 
             ArticlePageObject.waitForTitleElementWithSubstring("Java");
 
-            assertEquals(
+            Assert.assertEquals(
                     "We are not on the same page after login",
                     article_title,
                     ArticlePageObject.getArticleTitle("Java")
